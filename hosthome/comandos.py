@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """HostHome-CLI ara login y empezara tu cli
-Usage:
+Uso:
   hosthome empezar               (-v | --verbose)
   hosthome eliminar              (-v | --verbose)    
 Opciones:
