@@ -12,10 +12,12 @@ from docopt import docopt
 import platform
 from termcolor import cprint
 from warnings import warn
-import sys, os
+import sys, os, requests
 
 from hosthome.version import VERSION as __version__
 from hosthome.login import login
+
+url = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
 
 def mirarSiUsuarioEsImbecil(s: str):
   if s == "":
@@ -81,7 +83,7 @@ def main():
       cprint(f"> Hola {data['nombre']}", "green")
       main = input("Pon el archivo relativo en el que este el archivo \"main\" :: ")
       mirarSiUsuarioEsImbecil(main)
-      idioma = input("Pon el idioma en el que esta (ruby|python|nodejs|scala|clojure|cs|php) MIRAR DOCS URGENTE (http://127.0.0.1:5000/docs) :: ").strip()
+      idioma = input(f"Pon el idioma en el que esta (ruby|python|nodejs|scala|clojure|cs|php) MIRAR DOCS URGENTE ({url}docs) :: ").strip()
       mirarSiUsuarioEsImbecil(idioma)
 
       crearArchivo(main, idioma)

@@ -2,7 +2,9 @@ import requests
 from getpass import getpass
 from termcolor import cprint
 
-import webbrowser
+import webbrowser, requests
+
+url = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
 
 def login():
     
@@ -15,13 +17,13 @@ def login():
     mail = input("Porfavor escribe tu email :: ")
     psw = getpass("Escribe tu contraseña :: ")
     
-    data = requests.get(f"http://127.0.0.1:5000/login?psw{psw}=&mail={mail}").json()
+    data = requests.get(f"{url}login?psw{psw}=&mail={mail}").json()
 
     if data == {}:
         cprint("Esa cuenta no existe intentalo otra vez", "red")
         si_no = input("\n¿Quieres crearte una? [s/n] :: ")
         if si_no == "s":
-            webbrowser.open('http://127.0.0.1:5000/register', new=2)
+            webbrowser.open('{url}register', new=2)
             return login()
         else:
             cprint("Veo que no", "red")
