@@ -6,7 +6,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-with open("README.md") as readme_file:
+with open("README.md", "r", encoding="utf-8") as readme_file:
     readme = readme_file.read()
 
 requirements = []
@@ -17,9 +17,10 @@ for r in f:
 
 setup(
     name="HostHome-cli",
-    version="1.2.0",
+    version="1.2.4",
     description="HostHome-cli para empezar con el host",
     long_description=readme,
+    long_description_content_type="text/markdown",
     author="Maubg",
     url="https://github.com/HostHome-of/python-CLI",
     include_package_data=True,
