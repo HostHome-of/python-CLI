@@ -41,7 +41,6 @@ TIENE QUE TENER UN "requirements.txt" EN EL DIRECTORIO PADRE
 - RUBY
 TIENE QUE TENER UN Gemfile
 -----
-
 """
 
 def cojerInstalacion(lang: str, main: str):

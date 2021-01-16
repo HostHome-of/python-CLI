@@ -1,28 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-    instalacion de una nueva version
-
-    CAMBIAR LA VERSION
-
-    Crear una nueva distribuicion
-    'python setup.py sdist bdist_wheel'
-
-    Checkear si esta
-    'twine check dist/*'
-    Si esta la version todo ha salido bien
-
-    Luego: 'twine upload --repository-url https://upload.pypi.org/legacy/ dist/maupip-VERSION*', version = ej: 1.0.3* 
-    Para suvirlo. La version tiene que estar despues de dist/ con un asterisco al final (*)
-
-    rellenar lo que te pregunte
-
-    'pip uninstall mau' (Si esta instalado)
-    'pip install mau', Le puedes dar al link que te saldra <- o -> instalarlo y ya
-
-"""
-
 try:
     from setuptools import setup
 except ImportError:
@@ -39,7 +17,7 @@ for r in f:
 
 setup(
     name="HostHome-cli",
-    version="1.0.2",
+    version="1.2.0",
     description="HostHome-cli para empezar con el host",
     long_description=readme,
     author="Maubg",
