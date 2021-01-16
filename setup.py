@@ -9,15 +9,17 @@ except ImportError:
 with open("README.md", "r", encoding="utf-8") as readme_file:
     readme = readme_file.read()
 
-requirements = []
-f = open("./requirements.txt", "r").read().split("\n")
-for r in f:
-    requirements.append(str(r))
+requirements = [
+    "requests",
+    "warn",
+    "termcolor",
+    "docopt"
+]
 
 
 setup(
     name="HostHome-cli",
-    version="1.2.4",
+    version="1.3.1",
     description="HostHome-cli para empezar con el host",
     long_description=readme,
     long_description_content_type="text/markdown",
@@ -39,4 +41,5 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3"
-    ])
+    ]
+)

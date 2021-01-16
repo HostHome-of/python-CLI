@@ -10,6 +10,6 @@ C:\> hosthome -v
 C:\> hosthome empezar # Y se creara tu archivo
 ```
 
-# Lenguages admitidos
+### Lenguages admitidos
 
 * (ruby|python|nodejs|scala|clojure|cs|php)
