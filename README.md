@@ -12,4 +12,4 @@ C:\> hosthome empezar # Y se creara tu archivo
 
 ### Lenguages admitidos
 
-* (ruby|python|nodejs|scala|clojure|cs|php)
+* ruby, python, nodejs, scala, clojure, cs, php)
