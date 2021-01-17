@@ -19,54 +19,38 @@ from hosthome.login import login
 
 url = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
 
-def mirarSiUsuarioEsImbecil(s: str):
+verbose = False
+
+def mirarSiUsuarioEsImbecil(s: str, i: bool = False):
   if s == "":
     cprint("Pon un argumento valido", "red")
     sys.exit(1)
+  if i:
+    if s not in "ruby,python,nodejs,scala,clojure,cs,php".split(","):
+      cprint("Pon un argumento valido", "red")
+      sys.exit(1)          
 
 archivo = """
-lenguage: tempLen
-main: tempMain
-instalacion: insTemp
-cmdStart: tempCmdStart
+run = "tempCmdStart"
+len = "tempLen"
 
 ----- ADVERTENCIA
 NO MENTIR SOBRE LA INFORMACION SINO EL HOST SERA ELIMINADO
 NO TOCAR NADA A NO SER QUE SEA NECESARIO
 
 SI OCURRE UN ERROR PODEIS PONERLO AQUI (https://github.com/HostHome-of/python-CLI/issues)
-
-- JS
-TIENE QUE TENER UN SCRIPT LLAMADO "start" PARA QUE FUNCIONE
-- PYTHON
-TIENE QUE TENER UN "requirements.txt" EN EL DIRECTORIO PADRE
-- RUBY
-TIENE QUE TENER UN Gemfile
 -----
 """
 
-def cojerInstalacion(lang: str, main: str):
-  lenguages = {
-    "ruby": ["bundle install", f"ruby {main}"],
-    "npm": ["npm i", "npm start"],
-    "php": ["none", f"php {main}"]
-  } # Ayuda con los otros
-
-  try:
-    return lenguages[lang]
-  except:
-    return ["none", "none"]
-
-def crearArchivo(main: str, lang: str):
+def crearArchivo(Lenguage: str, cmd: str):
   try:
     data = open(".host.home", "x")
   except:
     os.remove(".host.home")
     data = open(".host.home", "x")
-  archivo2 = str(archivo.replace("tempLen", lang)
-                .replace("tempMain", main)
-                .replace("insTemp", cojerInstalacion(lang, main)[0])
-                .replace("tempCmdStart", cojerInstalacion(lang, main)[1])
+  archivo2 = str(archivo
+                .replace("tempLen", main)
+                .replace("tempCmdStart", cmd)
                 )
   data.write(archivo2)
 
@@ -78,15 +62,19 @@ def main():
     if platform.system() != "Windows":
       warn("Encontré un sistema que no es Windows. Es posible que la instalación del paquete no funcione.")
 
-    if args["empezar"]:
+    if args["empezar"]:    
+
       data = login()
       cprint(f"> Hola {data['nombre']}", "green")
-      main = input("Pon el archivo relativo en el que este el archivo \"main\" :: ")
-      mirarSiUsuarioEsImbecil(main)
-      idioma = input(f"Pon el idioma en el que esta (ruby|python|nodejs|scala|clojure|cs|php) MIRAR DOCS URGENTE ({url}docs) :: ").strip()
-      mirarSiUsuarioEsImbecil(idioma)
+      instalacion = input("Pon el comando para comenzar la instalacion :: Ej: npm i ")
+      mirarSiUsuarioEsImbecil(instalacion)
+      lenguage = input(f"Pon el idioma en el que esta \n * ruby\n * python\n * nodejs\n * scala\n * clojure\n * cs\n * php\n MIRAR DOCS URGENTE ({url}docs) :: ").strip()
+      mirarSiUsuarioEsImbecil(lenguage, i=True)
 
-      crearArchivo(main, idioma)
+      if args["-v"] or args["--verbose"]:
+            verbose = True
+
+      crearArchivo(lenguage, instalacion)
 
       sys.exit(0)
   except Exception as e:
