@@ -17,13 +17,13 @@ def login():
     mail = input("Porfavor escribe tu email :: ")
     psw = getpass("Escribe tu contraseña :: ")
     
-    data = requests.get(f"{url}login?psw={psw}=&mail={mail}").json()
+    data = requests.post(f"{url}login?psw={psw}=&mail={mail}").json()
 
-    if data == {}:
+    if str(data) == "{}":
         cprint("Esa cuenta no existe intentalo otra vez", "red")
         si_no = input("\n¿Quieres crearte una? [s/n] :: ")
         if si_no == "s":
-            webbrowser.open('{url}register', new=2)
+            webbrowser.open(f'{url}register', new=2)
             return login()
         else:
             cprint("Veo que no", "red")

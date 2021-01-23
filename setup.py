@@ -19,7 +19,7 @@ requirements = [
 
 setup(
     name="HostHome-cli",
-    version="1.3.5",
+    version="1.3.8",
     description="HostHome-cli para empezar con el host",
     long_description=readme,
     long_description_content_type="text/markdown",
