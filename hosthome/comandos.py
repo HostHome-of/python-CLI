@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """HostHome-CLI ara login y empezara tu cli
 Usage:
-  hosthome empezar               [-v | --verbose]
-  hosthome eliminar              [-v | --verbose]
+  hosthome empezar               [--verbose]
+  hosthome eliminar              [--verbose]
 Opciones:
   -h --help                      Muestra esta pantalla.
   -v --version                   Show version.
@@ -18,8 +18,7 @@ from hosthome.version import VERSION as __version__
 from hosthome.login import login
 
 url = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
-
-verbose = False
+docs = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["docs"]
 
 def mirarSiUsuarioEsImbecil(s: str, i: bool = False):
   if s == "":
@@ -42,17 +41,28 @@ SI OCURRE UN ERROR PODEIS PONERLO AQUI (https://github.com/HostHome-of/python-CL
 -----
 """
 
-def crearArchivo(Lenguage: str, cmd: str):
+def crearArchivo(Lenguage: str, cmd: str, verbose: bool):
+  if verbose:
+    print("\n ---- Logs")
+    print("Creando archivo...")
   try:
-    data = open(".host.home", "x")
+    data = open(".hosthome", "x")
   except:
-    os.remove(".host.home")
-    data = open(".host.home", "x")
+    if verbose:
+      print("Archivo localizado")
+      print("Eliminando archivo...")
+    os.remove(".hosthome")
+    if verbose:
+      print("Recreando...")
+    data = open(".hosthome", "x")
+  if verbose:
+    print("Escribiendo archivo...")
   archivo2 = str(archivo
-                .replace("tempLen", main)
+                .replace("tempLen", Lenguage)
                 .replace("tempCmdStart", cmd)
                 )
   data.write(archivo2)
+  cprint("¡ya esta!", "green")
 
 def main():
 
@@ -63,18 +73,18 @@ def main():
       warn("Encontré un sistema que no es Windows. Es posible que la instalación del paquete no funcione.")
 
     if args["empezar"]:    
-
+      verbose = False
       data = login()
-      cprint(f"> Hola {data['nombre']}", "green")
-      instalacion = input("Pon el comando para comenzar la instalacion :: Ej: npm i ")
+      cprint(f"\nBienvenido {data['nombre']}\n", "green")
+      instalacion = input("Pon el comando para ejecutar el programa :: ")
       mirarSiUsuarioEsImbecil(instalacion)
-      lenguage = input(f"Pon el idioma en el que esta \n * ruby\n * python\n * nodejs\n * scala\n * clojure\n * cs\n * php\n MIRAR DOCS URGENTE ({url}docs) :: ").strip()
+      lenguage = input(f"Pon el idioma en el que esta \n * ruby\n * python\n * nodejs\n * scala\n * clojure\n * cs\n * php\n MIRAR DOCS URGENTE ({docs}) :: ").strip()
       mirarSiUsuarioEsImbecil(lenguage, i=True)
 
-      if args["-v"] or args["--verbose"]:
-            verbose = True
+      if "--verbose" in args:
+        verbose = True
 
-      crearArchivo(lenguage, instalacion)
+      crearArchivo(lenguage, instalacion, verbose)
 
       sys.exit(0)
   except Exception as e:

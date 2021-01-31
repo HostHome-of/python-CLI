@@ -17,7 +17,9 @@ def login():
     mail = input("Porfavor escribe tu email :: ")
     psw = getpass("Escribe tu contraseña :: ")
     
-    data = requests.post(f"{url}login?psw={psw}=&mail={mail}").json()
+    data = requests.post(f"{url}login?psw={psw}&mail={mail}").json()
+
+    # print(data)
 
     if str(data) == "{}":
         cprint("Esa cuenta no existe intentalo otra vez", "red")
