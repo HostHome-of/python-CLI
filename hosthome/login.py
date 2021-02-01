@@ -3,19 +3,25 @@ from getpass import getpass
 from termcolor import cprint
 
 import webbrowser, requests
+import inquirer
 
 url = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
+banner = """
+|_|  _   _ _|_ |_|  _  ._ _   _  
+| | (_) _>  |_ | | (_) | | | (/_                                             
+"""
 
 def login():
     
-    print("\t\t\t\t\t"+"-"*33)
-    print("\t\t\t\t\t"+"|\t"+"                 \t|")
-    print("\t\t\t\t\t"+"|\t"+"Login en HostHome\t|")
-    print("\t\t\t\t\t"+"|\t"+"                 \t|")
-    print("\t\t\t\t\t"+"-"*33)
+    print(banner)
 
-    mail = input("Porfavor escribe tu email :: ")
-    psw = getpass("Escribe tu contraseña :: ")
+    questions = [
+        inquirer.Text('mail', message="Escribe tu email"),
+    ]
+    answers = inquirer.prompt(questions)
+
+    mail = answers["mail"]
+    psw = getpass("[?] Escribe tu contraseña: ")
     
     data = requests.post(f"{url}login?psw={psw}&mail={mail}").json()
 
@@ -23,8 +29,9 @@ def login():
 
     if str(data) == "{}":
         cprint("Esa cuenta no existe intentalo otra vez", "red")
-        si_no = input("\n¿Quieres crearte una? [s/n] :: ")
-        if si_no == "s":
+        answers = inquirer.prompt([inquirer.Confirm('si_no',
+                message="Should I stop", default=True)])
+        if answers["si_no"]:
             webbrowser.open(f'{url}register', new=2)
             return login()
         else:

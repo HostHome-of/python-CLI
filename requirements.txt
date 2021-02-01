@@ -2,3 +2,4 @@ requests
 warn
 termcolor
 docopt
+inquirer

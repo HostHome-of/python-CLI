@@ -17,17 +17,10 @@ import sys, os, requests
 from hosthome.version import VERSION as __version__
 from hosthome.login import login
 
-url = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
-docs = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["docs"]
+import inquirer
 
-def mirarSiUsuarioEsImbecil(s: str, i: bool = False):
-  if s == "":
-    cprint("Pon un argumento valido", "red")
-    sys.exit(1)
-  if i:
-    if s not in "ruby,python,nodejs,scala,clojure,cs,php".split(","):
-      cprint("Pon un argumento valido", "red")
-      sys.exit(1)          
+url = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
+docs = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["docs"]   
 
 archivo = """
 run = "tempCmdStart"
@@ -76,12 +69,21 @@ def main():
       verbose = False
       data = login()
       cprint(f"\nBienvenido {data['nombre']}\n", "green")
-      instalacion = input("Pon el comando para ejecutar el programa :: ")
-      mirarSiUsuarioEsImbecil(instalacion)
-      lenguage = input(f"Pon el idioma en el que esta \n * ruby\n * python\n * nodejs\n * scala\n * clojure\n * cs\n * php\n MIRAR DOCS URGENTE ({docs}) :: ").strip()
-      mirarSiUsuarioEsImbecil(lenguage, i=True)
 
-      if "--verbose" in args:
+      questions = [
+        inquirer.Text('cmd', message="Pon el comando de ejecucion"),
+        inquirer.List('len',
+                      message="Cual es tu lenguage de programacion?",
+                      choices=["ruby", "python", "nodejs", "scala", "clojure", "cs", "php"],
+                  )
+      ]
+
+      answers = inquirer.prompt(questions)
+
+      instalacion = answers["cmd"]
+      lenguage = answers["len"]
+
+      if args["--verbose"]:
         verbose = True
 
       crearArchivo(lenguage, instalacion, verbose)
