@@ -13,13 +13,14 @@ requirements = [
     "requests",
     "warn",
     "termcolor",
-    "docopt"
+    "docopt",
+    "inquirer"
 ]
 
 
 setup(
     name="HostHome-cli",
-    version="1.4.4",
+    version="1.4.6",
     description="HostHome-cli para empezar con el host",
     long_description=readme,
     long_description_content_type="text/markdown",
