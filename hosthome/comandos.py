@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 """HostHome-CLI ara login y empezara tu cli
 Usage:
-  hosthome empezar               [--verbose]
-  hosthome eliminar              [--verbose]
-Opciones:
-  -h --help                      Muestra esta pantalla.
-  -v --version                   Show version.
+    hosthome          [-h | --help]
+    hosthome empezar  [--verbose]
+    hosthome eliminar [--verbose] 
+    hosthome info id
+    hosthome         [-v | --version]
+
+Argumentos:
+    --help (-h)     :: Enseña este mensage
+    --verbose       :: Dice lo que esta pasando
+    --version (-v)  :: Da la version del CLI
 """
 
 from docopt import docopt
@@ -60,10 +65,10 @@ def crearArchivo(Lenguage: str, cmd: str, verbose: bool):
 def main():
 
   try:
-    args = docopt(__doc__, version="HostHome-CLI | version :: {}".format(__version__))
+    args = docopt(__doc__, version="HostHome-CLI | pip :: v = {}".format(__version__))
 
     if platform.system() != "Windows":
-      warn("Encontré un sistema que no es Windows. Es posible que la instalación del paquete no funcione.")
+      warn("Encontré un sistema que no es Windows. Es posible que algo no funcione.")
 
     if args["empezar"]:    
       verbose = False

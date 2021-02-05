@@ -8,7 +8,7 @@ import inquirer
 url = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
 banner = """
 |_|  _   _ _|_ |_|  _  ._ _   _  
-| | (_) _>  |_ | | (_) | | | (/_                                             
+| | (_) _>  |_ | | (_) | | | (/_    - pip                                   
 """
 
 def login():
