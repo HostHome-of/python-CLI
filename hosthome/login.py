@@ -23,7 +23,7 @@ def login():
     mail = answers["mail"]
     psw = getpass("[?] Escribe tu contraseña: ")
     
-    data = requests.post(f"{url}login?psw={psw}&mail={mail}").json()
+    data = requests.post(f"{url}login?psw={psw}&mail={mail}&consola=verdad").json()
 
     # print(data)
 

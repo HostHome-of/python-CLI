@@ -20,12 +20,12 @@ requirements = [
 
 setup(
     name="HostHome-cli",
-    version="2.0.8",
+    version="3.0.2",
     description="HostHome-cli para empezar con el host",
     long_description=readme,
     long_description_content_type="text/markdown",
     author="Maubg",
-    url="https://github.com/HostHome-of/python-CLI",
+    url="https://github.com/HostHome-oficial/python-CLI",
     include_package_data=True,
     install_requires=requirements,
     packages=[

@@ -3,14 +3,14 @@
 Usage:
     hosthome          [-h | --help]
     hosthome empezar  [--verbose]
-    hosthome eliminar [--verbose] 
+    hosthome eliminar [--verbose]
     hosthome info id
-    hosthome         [-v | --version]
+    hosthome          [-v | --version]
 
 Argumentos:
-    --help (-h)     :: Enseña este mensage
-    --verbose       :: Dice lo que esta pasando
-    --version (-v)  :: Da la version del CLI
+    --help -h          :: Enseña este mensage
+    --verbose          :: Dice lo que esta pasando
+    --version -v       :: Da la version del CLI
 """
 
 from docopt import docopt
@@ -35,7 +35,7 @@ len = "tempLen"
 NO MENTIR SOBRE LA INFORMACION SINO EL HOST SERA ELIMINADO
 NO TOCAR NADA A NO SER QUE SEA NECESARIO
 
-SI OCURRE UN ERROR PODEIS PONERLO AQUI (https://github.com/HostHome-of/python-CLI/issues)
+SI OCURRE UN ERROR PODEIS PONERLO AQUI (https://github.com/HostHome-oficial/python-CLI/issues)
 -----
 """
 
@@ -63,6 +63,19 @@ def crearArchivo(Lenguage: str, cmd: str, verbose: bool):
   cprint("¡ya esta!", "green")
 
 def main():
+  """HostHome-CLI ara login y empezara tu cli
+  Usage:
+      hosthome          [-h | --help]
+      hosthome empezar  [--verbose]
+      hosthome eliminar [--verbose]
+      hosthome info id
+      hosthome          [-v | --version]
+
+  Argumentos:
+      --help -h          :: Enseña este mensage
+      --verbose          :: Dice lo que esta pasando
+      --version -v       :: Da la version del CLI
+  """
 
   try:
     args = docopt(__doc__, version="HostHome-CLI | pip :: v = {}".format(__version__))
@@ -94,5 +107,21 @@ def main():
       crearArchivo(lenguage, instalacion, verbose)
 
       sys.exit(0)
+
+    print(
+  """HostHome-CLI ara login y empezara tu cli
+  Uso:
+      hosthome          [-h | --help]
+      hosthome empezar  [--verbose]
+      hosthome eliminar [--verbose]
+      hosthome info id
+      hosthome          [-v | --version]
+
+  Argumentos:
+      --help -h          :: Enseña este mensage
+      --verbose          :: Dice lo que esta pasando
+      --version -v       :: Da la version del CLI
+  """
+    )
   except Exception as e:
     print(e)
