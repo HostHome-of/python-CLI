@@ -1,0 +1,36 @@
+name: python-cli
+
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  build-n-publish:
+    name: El CLI de python 🐍 para HostHome :)
+    runs-on: ubuntu-latests
+    steps:
+    - uses: actions/checkout@master
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install pypa/build
+      run: >-
+        python -m
+        pip install
+        build
+        --user
+    - name: Construye una rueda binaria y un tarball fuente
+      run: >-
+        python -m
+        build
+        --sdist
+        --wheel
+        --outdir dist/
+        .
+    - name: Publicar distribuicion 📦 a PyPI
+      if: startsWith(github.ref, 'refs/tags')
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        password: ${{ secrets.PYPI_API_TOKEN }}
