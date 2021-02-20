@@ -1,9 +1,6 @@
 name: python-cli
 
-on:
-  push:
-    branches:
-      - main
+on: push
       
 jobs:
   build-n-publish:
