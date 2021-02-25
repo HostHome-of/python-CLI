@@ -110,17 +110,17 @@ def main():
 
     print(
   """HostHome-CLI ara login y empezara tu cli
-  Uso:
-      hosthome          [-h | --help]
-      hosthome empezar  [--verbose]
-      hosthome eliminar [--verbose]
-      hosthome info id
-      hosthome          [-v | --version]
+Uso:
+    hosthome          [-h | --help]
+    hosthome empezar  [--verbose]
+    hosthome eliminar [--verbose]
+    hosthome info id
+    hosthome          [-v | --version]
 
-  Argumentos:
-      --help -h          :: Enseña este mensage
-      --verbose          :: Dice lo que esta pasando
-      --version -v       :: Da la version del CLI
+Argumentos:
+    --help -h          :: Enseña este mensage
+    --verbose          :: Dice lo que esta pasando
+    --version -v       :: Da la version del CLI
   """
     )
   except Exception as e:

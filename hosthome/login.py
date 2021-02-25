@@ -30,7 +30,7 @@ def login():
     if str(data) == "{}":
         cprint("Esa cuenta no existe intentalo otra vez", "red")
         answers = inquirer.prompt([inquirer.Confirm('si_no',
-                message="Should I stop", default=True)])
+                message="¿Crearse una cuenta?", default=True)])
         if answers["si_no"]:
             webbrowser.open(f'{url}register', new=2)
             return login()
